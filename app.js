@@ -1,7 +1,10 @@
-// Registrar Service Worker
+// Registrar Service Worker SOLO para GitHub Pages
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js');
+    navigator.serviceWorker
+      .register('/Tutoriales/sw.js')
+      .then((reg) => console.log('Service Worker registrado:', reg.scope))
+      .catch((err) => console.error('Error al registrar Service Worker:', err));
   });
 }
 
@@ -15,21 +18,17 @@ omitBtn?.addEventListener('click', () => {
 // PWA install prompt
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
+
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
   if (installBtn) installBtn.hidden = false;
 });
+
 installBtn?.addEventListener('click', async () => {
   installBtn.hidden = true;
+  if (!deferredPrompt) return;
   await deferredPrompt.prompt();
 });
-// Registro del Service Worker para PWA offline
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/sw.js')
-      .then((reg) => console.log('Service Worker registrado:', reg.scope))
-      .catch((err) => console.error('Error al registrar Service Worker:', err));
-  });
-}
+
+
