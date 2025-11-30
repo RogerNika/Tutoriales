@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bienvenida | App Tutorial Mobile</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#3f2c83">
+
+</head>
+<body>
+  <header class="app-header">
+    <h1>Bienvenido</h1>
+    <nav class="nav-tabs">
+      <a href="sensores.html" class="tab-btn active">Sensores</a>
+      <a href="servicios.html" class="tab-btn">Servicios</a>
+      <a href="librerias.html" class="tab-btn">Librerías</a>
+      <a href="seguridad.html" class="tab-btn">Seguridad</a>
+      <a href="despliegue.html" class="tab-btn">Despliegue</a>
+      <a href="distribucion.html" class="tab-btn">Distribución</a>
+      <a href="referencias.html" class="tab-btn">Referencias</a>
+
+      <button id="logoutBtn" class="secondary">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="card">
+      <h2>Resumen</h2>
+      <p>Usa el menú para navegar entre los distintos temas. Esta App es instalable y funciona offline.</p>
+      <div id="welcomeProfile" class="status"></div>
+      <button id="installBtn" class="primary" hidden>Instalar como App (PWA)</button>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>HTML, CSS y JavaScript — PWA offline con Service Worker.</p>
+  </footer>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
