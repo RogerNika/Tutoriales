@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>App Tutorial Mobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:,"> <!-- Evita el 404 del favicon -->
-  <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#3f2c83">
-
+  <link rel="icon" href="data:,">
+  <link rel="manifest" href="/Tutoriales/manifest.webmanifest">
+  <meta name="theme-color" content="#3f2c83">
 </head>
+
 <body>
   <h1>App Tutorial Mobile</h1>
   <p>Regístrate o inicia sesión para continuar. También puedes omitir el login.</p>
@@ -47,18 +48,11 @@
     <button type="button" id="googleLoginBtn" class="btn-google">Iniciar sesión con Google</button>
   </form>
 
-  <!-- Menú de opciones -->
-  <div class="menu card">
-    <h2>Opciones disponibles</h2>
-    <ul>
-      <li><button type="button" id="btnPerfil">👤 Ver perfil</button></li>
-      <li><button type="button" id="btnEditar">✏️ Editar información</button></li>
-      <li><button type="button" id="btnDatos">📊 Consultar datos</button></li>
-      <li><button type="button" id="btnLogout">🚪 Cerrar sesión</button></li>
-    </ul>
-  </div>
+  <!-- Omitir login -->
 
-  <button onclick="window.location.href='bienvenida.html'" class="btn-secondary">Omitir e ir al menú</button>
+  <button onclick="window.location.href='bienvenida.html'" class="btn-secondary">
+    Omitir e ir al menú
+  </button>
 
   <div id="loginStatus"></div>
 
@@ -81,21 +75,21 @@
 
     firebase.initializeApp(firebaseConfig);
     window.auth = firebase.auth();
-    window.db = firebase.firestore();
+    window.db  = firebase.firestore();
   </script>
 
   <!-- Lógica UI + Auth -->
   <script>
-    const regForm = document.getElementById('registerForm');
-    const logForm = document.getElementById('loginForm');
+    const regForm     = document.getElementById('registerForm');
+    const logForm     = document.getElementById('loginForm');
     const loginStatus = document.getElementById('loginStatus');
-    const googleBtn = document.getElementById('googleLoginBtn');
+    const googleBtn   = document.getElementById('googleLoginBtn');
 
     // Registro email/contraseña
     regForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('regEmail').value.trim();
-      const pass = document.getElementById('regPass').value.trim();
+      const email       = document.getElementById('regEmail').value.trim();
+      const pass        = document.getElementById('regPass').value.trim();
       const displayName = document.getElementById('regDisplayName').value.trim();
 
       try {
@@ -120,7 +114,7 @@
     logForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('logEmail').value.trim();
-      const pass = document.getElementById('logPass').value.trim();
+      const pass  = document.getElementById('logPass').value.trim();
 
       try {
         await window.auth.signInWithEmailAndPassword(email, pass);
@@ -136,7 +130,7 @@
       const provider = new firebase.auth.GoogleAuthProvider();
       try {
         const result = await window.auth.signInWithPopup(provider);
-        const user = result.user;
+        const user   = result.user;
 
         await window.db.collection('users').doc(user.uid).set({
           email: user.email,
@@ -153,7 +147,7 @@
       }
     });
 
-    // Ejemplos menú (puedes conectar a tu lógica real)
+    // Logout rápido desde index (opcional)
     document.getElementById('btnLogout')?.addEventListener('click', async () => {
       try {
         await window.auth.signOut();
@@ -163,5 +157,9 @@
       }
     });
   </script>
+
+  <!-- app.js para Service Worker y PWA -->
+  <script src="app.js"></script>
 </body>
 </html>
+
